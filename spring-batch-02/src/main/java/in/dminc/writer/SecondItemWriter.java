@@ -12,5 +12,6 @@ public class SecondItemWriter implements ItemWriter<Integer> {
         // size of 'items' is same as chunk size.
         System.out.println("inside second item writer");
         items.forEach(System.out::println);
+        Thread.sleep(10000);
     }
 }
