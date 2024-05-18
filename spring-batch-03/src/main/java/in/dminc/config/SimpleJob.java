@@ -9,17 +9,14 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 
 import java.io.File;
@@ -42,11 +39,14 @@ public class SimpleJob {
     @Autowired
     StudentCSVFlatFileItemWriter studentCSVFlatFileItemWriter;
 
+    @Autowired
+    FlatFileItemReader<Student> reader;
+
     @Bean
     public Job buildSimpleJob() {
         return jobBuilderFactory.get("Chunk Job")
             .incrementer(new RunIdIncrementer())
-            .start(secondChunkStep())
+            .start(thirdChunkStep())
             .build();
     }
 
@@ -63,6 +63,14 @@ public class SimpleJob {
         return stepBuilderFactory.get("First Chunk Step")
             .<Student, Student>chunk(99)
             .reader(studentFlatFileItemReader())
+            .writer(studentCSVFlatFileItemWriter)
+            .build();
+    }
+
+    private Step thirdChunkStep() {
+        return stepBuilderFactory.get("First Chunk Step")
+            .<Student, Student>chunk(99)
+            .reader(reader)
             .writer(studentCSVFlatFileItemWriter)
             .build();
     }
