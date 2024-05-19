@@ -1,6 +1,6 @@
 package in.dminc.service;
 
-import in.dminc.model.Students;
+import in.dminc.model.Student;
 import in.dminc.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,8 +13,12 @@ public class StudentService {
     @Autowired
     StudentRepository studentRepository;
 
-    public Page<Students> getStudents(int pageNumber, int pageSize) {
+    public Page<Student> getStudents(int pageNumber, int pageSize) {
         Pageable pageRequest = PageRequest.of(pageNumber, pageSize);
         return studentRepository.findAll(pageRequest);
+    }
+
+    public Student saveStudent(Student student) {
+        return studentRepository.save(student);
     }
 }

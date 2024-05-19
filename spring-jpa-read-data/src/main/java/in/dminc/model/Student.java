@@ -2,18 +2,16 @@ package in.dminc.model;
 
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
-public class Students {
+@Entity(name = "student_backup")
+public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     private String firstName;
     private String lastName;
@@ -23,7 +21,7 @@ public class Students {
 
     @Override
     public String toString() {
-        return "Students[" +
+        return "Student[" +
             "id=" + id +
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +
