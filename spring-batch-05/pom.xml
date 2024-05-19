@@ -10,10 +10,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>in.dminc</groupId>
-    <artifactId>spring-batch-04</artifactId>
+    <artifactId>spring-batch-05</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-batch-04</name>
-    <description>spring-batch-04</description>
+    <name>spring-batch-05</name>
+    <description>spring-batch-05</description>
     <properties>
         <java.version>17</java.version>
     </properties>
